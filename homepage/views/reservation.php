@@ -37,14 +37,14 @@
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <a href="../login.php" class="btn btn-light">
+                    <a href="" class="btn btn-light">
                         <i class="fa fa-user" aria-hidden="true"></i>
                         Log in
                     </a>
                     &nbsp;
                     <div style="width:1px;background:black; height:25px;"></div>
                     &nbsp;
-                    <a href="../sign.php" class="btn btn-light">
+                    <a href="" class="btn btn-light">
                         <i class="fa fa-sign-in" aria-hidden="true"></i>
                         Sign in
                     </a>
@@ -75,15 +75,15 @@
                         $phone = htmlspecialchars(trim($_POST['phone']));
                         $passport = htmlspecialchars(trim($_POST['num_passport']));
                         $errors = array();
+                        $query = "INSERT INTO client (nom, prenom, email, phone, num_passport) VALUES ('$fname', '$lname','$email' ,'$phone', '$passport')";
 
-                       
-                        $query = mysqli_query($con, "INSERT INTO client (nom, prenom, email, phone, num_passport) VALUES ('$fname', '$lname','$email' ,'$phone', '$passport')");
-                                
-                                
-                            } 
+                        $sql = mysqli_query($con, $query);
+                        $id_client = mysqli_insert_id($con); 
                         
+                        $id_vol = $_GET['id_vol'] ;         
+                        $sql2 =  mysqli_query($con,"INSERT INTO reservation (id_client, id_vol) VALUES ('$id_client', '$id_vol'')");
                         
-                    
+                    }
                     ?>
                         <div class='container-fluid'>
                             <div class='row'>
